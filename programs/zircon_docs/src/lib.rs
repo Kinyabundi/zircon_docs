@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 use anchor_spl::token::{self, Token};
 use std::mem::size_of;
 
-declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
+declare_id!("FoyfSugJpPAzywE2yTVJVDyUmVzQ3rVSy3UoaeYhgia6");
 
 // Constants
 const USER_NAME_LENGTH: usize = 50;

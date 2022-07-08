@@ -1,13 +1,13 @@
 [features]
 seeds = false
-[programs.localnet]
-zircon_docs = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+[programs.devnet]
+zircon_docs = "FoyfSugJpPAzywE2yTVJVDyUmVzQ3rVSy3UoaeYhgia6"
 
 [registry]
 url = "https://anchor.projectserum.com"
 
 [provider]
-cluster = "localnet"
+cluster = "devnet"
 wallet = "/home/vin_gitonga/.config/solana/id.json"
 
 [scripts]

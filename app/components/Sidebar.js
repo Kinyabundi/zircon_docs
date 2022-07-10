@@ -13,6 +13,7 @@ import { VscGitPullRequestCreate } from "react-icons/vsc"
 import { TbGitPullRequestDraft } from "react-icons/tb"
 import { MdOutlineRequestPage } from "react-icons/md"
 import { GiHelicopterTail } from "react-icons/gi"
+import { useRouter } from "next/router"
 
 
 const Side = () => {
@@ -23,7 +24,7 @@ const Side = () => {
             top="10"
             left="24"
             zIndex="sticky"
-            h="full"
+            h="400px"
             pb="10"
             overflowX="hidden"
             overflowY="auto"
@@ -51,11 +52,12 @@ const Side = () => {
                 as="nav"
                 fontSize="sm"
                 color="gray.600"
+                px="4"
             >
-                <NavItem icon={GoHome} text={"Home"} />
-                <NavItem icon={VscGitPullRequestCreate} text={"Create New Medical File Request"} />
-                <NavItem icon={TbGitPullRequestDraft} text={"My Requests"} />
-                <NavItem icon={MdOutlineRequestPage} text={"Requests To Me"} />
+                <NavItem icon={GoHome} text={"Home"} redirectPath={"home"} />
+                <NavItem icon={VscGitPullRequestCreate} text={"Create New Medical File Request"} redirectPath={"create_request"} />
+                <NavItem icon={TbGitPullRequestDraft} text={"My Requests"} redirectPath={"my_requests"} />
+                <NavItem icon={MdOutlineRequestPage} text={"Requests To Me"} redirectPath={"requests_to_me"} />
 
                 <Flex alignItems="center" mt={8} >
                     <Image
@@ -81,7 +83,9 @@ const Side = () => {
     )
 }
 
-const NavItem = ({ icon, text, clickAction }) => {
+const NavItem = ({ icon, text, redirectPath = "home" }) => {
+    const router = useRouter()
+
     return (
         <Flex
             align="center"
@@ -89,7 +93,7 @@ const NavItem = ({ icon, text, clickAction }) => {
             pl="4"
             py="3"
             cursor="pointer"
-            onClick={clickAction}
+            onClick={() => router.push(`/${redirectPath}`)}
         >
             <Icon
                 mx="2"

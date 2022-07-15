@@ -17,33 +17,18 @@ import {
 import { FiUser } from "react-icons/fi"
 import { IoWalletOutline } from "react-icons/io5"
 import { TbSend } from "react-icons/tb"
-import Side from "../components/Sidebar"
-import Head from "next/head"
 
 const CreateRequest = () => {
     return (
         <>
-            <Head>
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-                <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;1,100&display=swap" rel="stylesheet" />
-                <title>Create Request</title>
-            </Head>
             <Flex
-                minH={"100vh"}
                 align={"center"}
                 justify={"center"}
                 bg={useColorModeValue("gray.50", "gray.800")}
                 fontFamily={"Poppins"}
-                ml={30}
+                mt={5}
             >
-                <Side />
-                <Stack spacing={8} mx={"auto"} w={"450px"}>
-                    <Stack align={"center"}>
-                        <Text fontSize={"lg"} color={"gray.600"}>
-                            Create new Request
-                        </Text>
-                    </Stack>
+                <Stack spacing={4} mx={"auto"} w={"450px"}>
                     <Box
                         rounded={"lg"}
                         bg={useColorModeValue("white", "gray.700")}

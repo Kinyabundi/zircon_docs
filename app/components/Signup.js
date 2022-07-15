@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     Flex,
     Box,
@@ -13,6 +13,7 @@ import {
     InputGroup,
     InputLeftElement,
     Icon,
+    useToast,
 } from "@chakra-ui/react";
 import { RiLoginCircleFill } from "react-icons/ri";
 import { HiOutlineMail } from "react-icons/hi";
@@ -20,11 +21,34 @@ import { FiUser } from "react-icons/fi";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import Head from "next/head";
 
-export default function Signup() {
+
+export default function Signup({ signup }) {
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [phoneno, setPhoneno] = useState("");
+    const toast = useToast();
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!name || !email || !phoneno) {
+            toast({
+                title: "Error",
+                description: "Please fill all the fields",
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+            });
+        } else {
+            await signup(name, email, phoneno);
+            toast({
+                title: 'Account created.',
+                description: "We've created your account for you.",
+                status: 'success',
+                duration: 9000,
+                isClosable: true,
+            })
+        }
+    }
 
 
     return (
@@ -109,6 +133,7 @@ export default function Signup() {
                                 _hover={{
                                     bg: "blue.500",
                                 }}
+                                onClick={handleSubmit}
                             >
                                 Signup
                             </Button>

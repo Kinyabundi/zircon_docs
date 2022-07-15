@@ -14,6 +14,7 @@ import { TbGitPullRequestDraft } from "react-icons/tb"
 import { MdOutlineRequestPage } from "react-icons/md"
 import { GiHelicopterTail } from "react-icons/gi"
 import { useRouter } from "next/router"
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui"
 
 
 const Side = () => {
@@ -58,6 +59,7 @@ const Side = () => {
                 <NavItem icon={VscGitPullRequestCreate} text={"Create New Medical File Request"} redirectPath={"create_request"} />
                 <NavItem icon={TbGitPullRequestDraft} text={"My Requests"} redirectPath={"my_requests"} />
                 <NavItem icon={MdOutlineRequestPage} text={"Requests To Me"} redirectPath={"requests_to_me"} />
+                <WalletMultiButton />
 
                 <Flex alignItems="center" mt={8} >
                     <Image

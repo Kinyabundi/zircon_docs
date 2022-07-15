@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 use anchor_spl::token::{self, Token};
 use std::mem::size_of;
 
-declare_id!("FoyfSugJpPAzywE2yTVJVDyUmVzQ3rVSy3UoaeYhgia6");
+declare_id!("3osDmv7UbNiNeoz3sPMcWoALeST7usSUVfBK6UphrS5y");
 
 // Constants
 const USER_NAME_LENGTH: usize = 50;
@@ -37,7 +37,6 @@ pub mod zircon_docs {
         name: String,
         email: String,
         phoneno: String,
-        account_type: String
     ) -> Result<()> {
         // Get the user from the context
         let user = &mut ctx.accounts.user;
@@ -49,8 +48,6 @@ pub mod zircon_docs {
         user.email = email;
         // set the user phoneno
         user.phoneno = phoneno;
-        // set the user account type
-        user.account_type = account_type;
 
         // Return success
         Ok(())
@@ -195,7 +192,7 @@ pub struct CreateUser<'info> {
     // Authenticate the user account
     #[account(
         init,
-        seeds = [b"user".as_ref()],
+        seeds = [b"user".as_ref(), authority.key().as_ref()],
         bump,
         payer = authority,
         space = size_of::<UserAccount>() + USER_NAME_LENGTH + USER_EMAIL_LENGTH + USER_ACCOUNT_TYPE_LENGTH + USER_PHONENO_LENGTH + 8 // size of user account and add 8 bytes for the discriminator
@@ -354,8 +351,6 @@ pub struct UserAccount {
     pub name: String,
     // User phone number
     pub phoneno: String,
-    // User account_type
-    pub account_type: String, // is either "client" (patient) or "provider" (hospital)
 }
 
 // Request Account

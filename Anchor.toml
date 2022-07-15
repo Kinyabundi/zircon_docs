@@ -1,7 +1,7 @@
 [features]
 seeds = false
 [programs.devnet]
-zircon_docs = "FoyfSugJpPAzywE2yTVJVDyUmVzQ3rVSy3UoaeYhgia6"
+zircon_docs = "3osDmv7UbNiNeoz3sPMcWoALeST7usSUVfBK6UphrS5y"
 
 [registry]
 url = "https://anchor.projectserum.com"

@@ -6,14 +6,16 @@ import MyRequests from "./MyRequests";
 import RequestsToMe from "./RequestsToMe";
 import Signup from "./Signup";
 import useAccount from "../hooks/useAccount";
+import useRequests from "../hooks/useRequests"
 
 const Feed = () => {
-    const { isAccount, signup } = useAccount();
+    const { isAccount, signup, authUser } = useAccount();
+    const { newRequest } = useRequests()
     return (
         <>
             {isAccount ? (
                 <Box fontFamily="Poppins" mx="auto" px={48} py={8}>
-                    <Navbar />
+                    <Navbar userDetail={authUser} />
                     <Tabs isFitted variant={"enclosed"} mt={5}>
                         <TabList>
                             <Tab>Home</Tab>
@@ -26,7 +28,7 @@ const Feed = () => {
                                 <Home />
                             </TabPanel>
                             <TabPanel>
-                                <CreateRequest />
+                                <CreateRequest createNewRequest={newRequest} />
                             </TabPanel>
                             <TabPanel>
                                 <MyRequests />

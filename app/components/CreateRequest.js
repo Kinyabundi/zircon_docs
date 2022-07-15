@@ -2,7 +2,6 @@ import {
     Flex,
     useColorModeValue,
     Stack,
-    Text,
     Box,
     FormControl,
     FormLabel,
@@ -12,13 +11,47 @@ import {
     InputLeftElement,
     Icon,
     Button,
-    FormHelperText
+    FormHelperText,
+    useToast
 } from "@chakra-ui/react"
 import { FiUser } from "react-icons/fi"
 import { IoWalletOutline } from "react-icons/io5"
 import { TbSend } from "react-icons/tb"
+import { useState } from "react"
 
-const CreateRequest = () => {
+const CreateRequest = ({ createNewRequest }) => {
+    const [message, setMessage] = useState("")
+    const [author, setAuthor] = useState("")
+    const [addressTo, setAddressTo] = useState("")
+    const toast = useToast()
+
+    const clickSubmit = async e => {
+        e.preventDefault()
+        if (!message || !author || !addressTo){
+            toast({
+                title: "Error",
+                description: "Please fill all the fields",
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+            });
+        }else {
+            await createNewRequest(message, author, addressTo, "approved")
+            setMessage("")
+            setAuthor("")
+            setAddressTo("")
+            toast({
+                title: 'Request created.',
+                description: "We've created your request for you. await response from addressed to",
+                status: 'success',
+                duration: 9000,
+                isClosable: true,
+            })
+        }
+    }
+
+
+
     return (
         <>
             <Flex
@@ -41,6 +74,8 @@ const CreateRequest = () => {
                                 <Textarea
                                     placeholder='Type request message'
                                     size='md'
+                                    value={message}
+                                    onChange={e => setMessage(e.target.value)}
                                 />
                             </FormControl>
                             <FormControl id="email">
@@ -53,6 +88,8 @@ const CreateRequest = () => {
                                         variant={"flushed"}
                                         color={"gray.500"}
                                         placeholder={"Jake Novan"}
+                                        value={author}
+                                        onChange={e => setAuthor(e.target.value)}
                                     />
                                 </InputGroup>
                             </FormControl>
@@ -66,6 +103,8 @@ const CreateRequest = () => {
                                         variant={"flushed"}
                                         color={"gray.500"}
                                         placeholder={"e.g. 9cH8J47J9Xjc2MbeDY9Nmytf91brc3KSNDxxwRY3UgZA"}
+                                        value={addressTo}
+                                        onChange={e => setAddressTo(e.target.value)}
                                     />
                                 </InputGroup>
                                 <FormHelperText>Paste the Wallet Address of the Target Hospital</FormHelperText>
@@ -77,6 +116,7 @@ const CreateRequest = () => {
                                 _hover={{
                                     bg: "blue.500",
                                 }}
+                                onClick={clickSubmit}
                             >
                                 Send Request
                             </Button>

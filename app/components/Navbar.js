@@ -1,9 +1,8 @@
-import { Flex, Button, Icon, Text } from "@chakra-ui/react";
+import { Flex, Icon, Text, Image } from "@chakra-ui/react";
 import { GiHelicopterTail } from "react-icons/gi";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui"
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
-
-const Navbar = () => {
+const Navbar = ({ userDetail }) => {
     return (
         <Flex
             fontFamily="Poppins"
@@ -24,8 +23,23 @@ const Navbar = () => {
                     Zircon Docs
                 </Text>
             </Flex>
-            <WalletMultiButton />
-            
+            <Flex align="center" px="4" py="3">
+                <WalletMultiButton />
+                <Flex alignItems="center" ml={3}>
+                    <Image
+                        h={10}
+                        fit="cover"
+                        rounded="full"
+                        src={`https://avatars.dicebear.com/api/adventurer/${userDetail.name
+                            .toLowerCase()
+                            .replaceAll(" ", "")}.svg`}
+                        alt="Avatar"
+                    />
+                    <Text mx={2} fontWeight="bold" color="gray.700">
+                        {userDetail.name}
+                    </Text>
+                </Flex>
+            </Flex>
         </Flex>
     );
 };

@@ -122,7 +122,7 @@ pub mod zircon_docs {
         ctx: Context<CreateReplyDocument>,
         reply_document_message_content: String,
         reply_author: String,
-        reply_document_url: String,
+        reply_document_name: String,
         reply_document_hash: String,
     ) -> Result<()> {
         // get the request first
@@ -136,14 +136,14 @@ pub mod zircon_docs {
         // set the reply author
         reply_document.reply_author = reply_author;
         // set the reply document url
-        reply_document.reply_document_url = reply_document_url;
+        reply_document.reply_document_name = reply_document_name;
         // set the reply document hash
         reply_document.reply_document_hash = reply_document_hash;
         // set the reply index
         reply_document.reply_index = request.request_reply_count;
         // set the reply timestamp
         reply_document.reply_time = ctx.accounts.clock.unix_timestamp;
-        // increment the request reply count    
+        // increment the request reply count
         request.request_reply_count += 1;
         // Return success
         Ok(())
@@ -397,7 +397,7 @@ pub struct ReplyDocumentAccount {
     // reply document messages
     pub reply_document_message_content: String,
     // reply document url
-    pub reply_document_url: String,
+    pub reply_document_name: String,
     // reply document hash
     pub reply_document_hash: String,
     // reply author

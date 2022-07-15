@@ -28,3 +28,19 @@ export function getProgramInstance(connection, wallet){
     return program;
 }
 
+export function filterRequests(allRequests, walletAddress, filterType){
+    let newArray = allRequests.filter(function(el){
+        if (filterType === "myrequests"){
+            return el.account.authority.toString() === walletAddress.toString()
+        }else if (filterType === "receiver") {
+            return el.account.requestAddressTo.toString() === walletAddress.toString()
+        }
+    })
+
+    // Now sort the array by request time
+    newArray.sort(
+        (a,b) => b.account.requestTime.toNumber() - a.account.requestTime.toNumber()
+    )
+
+    return newArray
+}

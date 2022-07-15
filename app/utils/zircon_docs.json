@@ -209,7 +209,7 @@
                     "type": "string"
                 },
                 {
-                    "name": "replyDocumentUrl",
+                    "name": "replyDocumentName",
                     "type": "string"
                 },
                 {
@@ -378,7 +378,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "replyDocumentUrl",
+                        "name": "replyDocumentName",
                         "type": "string"
                     },
                     {

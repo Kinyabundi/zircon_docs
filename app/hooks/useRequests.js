@@ -246,9 +246,9 @@ const useRequests = () => {
         console.log(messages)
 
         // sort the messages by time
-        // messages.sort(
-        //     (a, b) => b.replyTime.toNumber() - a.replyTime.toNumber()
-        // );
+        messages.sort(
+            (a, b) => b?.replyTime?.toNumber() - a?.replyTime?.toNumber()
+        );
 
         return messages;
     };

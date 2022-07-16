@@ -26,7 +26,9 @@ const ReplyMessage = () => {
         replyCount,
         initialTab,
         setCurrentTab,
-        setInitialTab
+        setInitialTab,
+        setReplyCount,
+        setRequestIndex,
     } = useContext(ModalContext);
     const toast = useToast();
 
@@ -55,6 +57,8 @@ const ReplyMessage = () => {
             setAuthor("");
             setCurrentTab(initialTab)
             setInitialTab(0)
+            setReplyCount(0)
+            setRequestIndex(0)
             toast({
                 title: "Reply message sent.",
                 description:

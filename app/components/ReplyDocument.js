@@ -32,7 +32,9 @@ const ReplyDocument = () => {
         initialTab,
         setCurrentTab,
         setInitialTab,
-        setTabname
+        setTabname,
+        setReplyCount,
+        setRequestIndex,
     } = useContext(ModalContext);
     const [message, setMessage] = useState("");
     const [author, setAuthor] = useState("");
@@ -73,6 +75,8 @@ const ReplyDocument = () => {
             setCurrentTab(initialTab)
             setInitialTab(0)
             setTabname("")
+            setReplyCount(0)
+            setRequestIndex(0)
             toast({
                 title: "Document sent.",
                 description: "We've sent your document for you.",

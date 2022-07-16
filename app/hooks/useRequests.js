@@ -214,17 +214,19 @@ const useRequests = () => {
 
         // sort documents by time
         documents.sort(
-            (a, b) => b.replyTime.toNumber() - a.replyTime.toNumber()
+            (a, b) => b?.replyTime?.toNumber() - a?.replyTime?.toNumber()
         );
 
         return documents;
     };
 
     const getMessageReplies = async (index, count) => {
+        console.log(index)
+        console.log(count)
         let msgsSigners = [];
 
         for (let i = 0; i < count; i++) {
-            let msgSigner = await anchor.web3.PublicKey.findProgramAddress(
+            let [msgSigner] = await anchor.web3.PublicKey.findProgramAddress(
                 [
                     utf8.encode("reply_message"),
                     new BN(index).toArrayLike(Buffer, "be", 8),
@@ -241,12 +243,12 @@ const useRequests = () => {
                 msgsSigners
             );
 
-        console.log(messages.length)
+        console.log(messages)
 
         // sort the messages by time
-        messages.sort(
-            (a, b) => b.replyTime.toNumber() - a.replyTime.toNumber()
-        );
+        // messages.sort(
+        //     (a, b) => b.replyTime.toNumber() - a.replyTime.toNumber()
+        // );
 
         return messages;
     };

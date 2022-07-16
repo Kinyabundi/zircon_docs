@@ -26,12 +26,14 @@ const useRequests = () => {
     const getRequests = async (filterType) => {
         // fetch all the requests created
         const allRequests = await program.account.requestAccount.all();
+        console.log(allRequests);
         const requests = filterRequests(
             allRequests,
             wallet.publicKey,
             filterType
         );
 
+        // console.log(requests)
         return requests;
     };
 
@@ -98,6 +100,8 @@ const useRequests = () => {
         message_text,
         author
     ) => {
+        console.log(index);
+        console.log(count);
         // get the request_pda
         let [request_pda] = await anchor.web3.PublicKey.findProgramAddress(
             [
@@ -111,7 +115,7 @@ const useRequests = () => {
         let [reply_message_pda] =
             await anchor.web3.PublicKey.findProgramAddress(
                 [
-                    utf8.encode("replyMessage"),
+                    utf8.encode("reply_message"),
                     new BN(index).toArrayLike(Buffer, "be", 8),
                     new BN(count).toArrayLike(Buffer, "be", 8),
                 ],
@@ -157,7 +161,7 @@ const useRequests = () => {
         let [reply_document_pda] =
             await anchor.web3.PublicKey.findProgramAddress(
                 [
-                    utf8.encode("replyDocument"),
+                    utf8.encode("reply_document"),
                     new BN(index).toArrayLike(Buffer, "be", 8),
                     new BN(count).toArrayLike(Buffer, "be", 8),
                 ],
@@ -184,13 +188,76 @@ const useRequests = () => {
         console.log(tx);
     };
 
+    const getDocumentReplies = async (index, count) => {
+        let docsSigners = [];
 
+        for (let i = 0; i < count; i++) {
+            let [docSigner] = await anchor.web3.PublicKey.findProgramAddress(
+                [
+                    utf8.encode("reply_document"),
+                    new BN(index).toArrayLike(Buffer, "be", 8),
+                    new BN(i).toArrayLike(Buffer, "be", 8),
+                ],
+                program.programId
+            );
+
+            docsSigners.push(docSigner);
+        }
+
+        const documents =
+            await program.account.replyDocumentAccount.fetchMultiple(
+                docsSigners
+            );
+
+        // const documents = await program.account.replyDocumentAccount.all()
+        console.log(documents.length)
+
+        // sort documents by time
+        documents.sort(
+            (a, b) => b.replyTime.toNumber() - a.replyTime.toNumber()
+        );
+
+        return documents;
+    };
+
+    const getMessageReplies = async (index, count) => {
+        let msgsSigners = [];
+
+        for (let i = 0; i < count; i++) {
+            let msgSigner = await anchor.web3.PublicKey.findProgramAddress(
+                [
+                    utf8.encode("reply_message"),
+                    new BN(index).toArrayLike(Buffer, "be", 8),
+                    new BN(i).toArrayLike(Buffer, "be", 8),
+                ],
+                program.programId
+            );
+
+            msgsSigners.push(msgSigner);
+        }
+
+        const messages =
+            await program.account.replyMessageAccount.fetchMultiple(
+                msgsSigners
+            );
+
+        console.log(messages.length)
+
+        // sort the messages by time
+        messages.sort(
+            (a, b) => b.replyTime.toNumber() - a.replyTime.toNumber()
+        );
+
+        return messages;
+    };
 
     return {
         getRequests,
         newRequest,
         createNewReplyMessage,
         createNewReplyDocument,
+        getDocumentReplies,
+        getMessageReplies,
     };
 };
 

@@ -1,8 +1,8 @@
-import { Flex, Icon, Text, Image } from "@chakra-ui/react";
+import { Flex, Icon, Text, Image, Button } from "@chakra-ui/react";
 import { GiHelicopterTail } from "react-icons/gi";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
-const Navbar = ({ userDetail }) => {
+const Navbar = ({ userDetail, refreshRequests }) => {
     return (
         <Flex
             fontFamily="Poppins"
@@ -39,6 +39,9 @@ const Navbar = ({ userDetail }) => {
                         {userDetail.name}
                     </Text>
                 </Flex>
+                <Button onClick={refreshRequests} >
+                    Refresh Requests
+                </Button>
             </Flex>
         </Flex>
     );

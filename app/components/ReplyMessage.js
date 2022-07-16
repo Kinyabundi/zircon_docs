@@ -9,14 +9,9 @@ import {
     Input,
     Icon,
     Button,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalCloseButton,
-    ModalBody,
-    ModalFooter,
+    useColorModeValue,
     useToast,
+    Flex,
 } from "@chakra-ui/react";
 
 import { FiUser } from "react-icons/fi";
@@ -26,8 +21,13 @@ import { ModalContext } from "../context";
 import useRequests from "../hooks/useRequests";
 
 const ReplyMessage = () => {
-    const { messageModalOpen, requestIndex, replyCount, setMessageModalOpen } =
-        useContext(ModalContext);
+    const {
+        requestIndex,
+        replyCount,
+        initialTab,
+        setCurrentTab,
+        setInitialTab
+    } = useContext(ModalContext);
     const toast = useToast();
 
     const [message, setMessage] = useState("");
@@ -53,6 +53,8 @@ const ReplyMessage = () => {
             );
             setMessage("");
             setAuthor("");
+            setCurrentTab(initialTab)
+            setInitialTab(0)
             toast({
                 title: "Reply message sent.",
                 description:
@@ -65,17 +67,13 @@ const ReplyMessage = () => {
     };
 
     return (
-        <Modal
-            isOpen={messageModalOpen}
-            onClose={setMessageModalOpen}
-            closeOnOverlayClick={false}
+        <Flex
+            ustify={"center"}
+            bg={useColorModeValue("gray.50", "gray.800")}
+            fontFamily={"Poppins"}
+            mt={5}
         >
-            <ModalOverlay />
-            <ModalContent>
-                <ModalHeader>Reply Message</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                    <Stack spacing={8} mx={"auto"} w={"400px"}>
+            <Stack spacing={8} mx={"auto"} w={"400px"}>
                         <Box p={4}>
                             <Stack spacing={4}>
                                 <FormControl id="email">
@@ -121,14 +119,7 @@ const ReplyMessage = () => {
                             </Stack>
                         </Box>
                     </Stack>
-                </ModalBody>
-                <ModalFooter>
-                    <Button onClick={() => setMessageModalOpen(false)}>
-                        Close
-                    </Button>
-                </ModalFooter>
-            </ModalContent>
-        </Modal>
+        </Flex>
     );
 };
 

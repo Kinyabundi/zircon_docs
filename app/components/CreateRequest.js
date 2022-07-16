@@ -19,7 +19,7 @@ import { IoWalletOutline } from "react-icons/io5"
 import { TbSend } from "react-icons/tb"
 import { useState } from "react"
 
-const CreateRequest = ({ createNewRequest }) => {
+const CreateRequest = ({ createNewRequest, refreshRequests }) => {
     const [message, setMessage] = useState("")
     const [author, setAuthor] = useState("")
     const [addressTo, setAddressTo] = useState("")
@@ -47,6 +47,7 @@ const CreateRequest = ({ createNewRequest }) => {
                 duration: 9000,
                 isClosable: true,
             })
+            refreshRequests()
         }
     }
 

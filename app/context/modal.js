@@ -7,6 +7,10 @@ export const ModalContextProvider = ({ children }) => {
     const [documentModalOpen, setDocumentModalOpen] = useState(false);
     const [requestIndex, setRequestIndex] = useState(0);
     const [replyCount, setReplyCount] = useState(0);
+    const [currentTab, setCurrentTab] = useState(0)
+    const [initialTab, setInitialTab] = useState(0)
+    const [tabname, setTabname] = useState("");
+
 
     const modalState = {
         messageModalOpen,
@@ -17,6 +21,12 @@ export const ModalContextProvider = ({ children }) => {
         setDocumentModalOpen,
         setRequestIndex,
         setReplyCount,
+        setCurrentTab,
+        currentTab,
+        initialTab,
+        setInitialTab,
+        tabname,
+        setTabname
     };
 
     return (

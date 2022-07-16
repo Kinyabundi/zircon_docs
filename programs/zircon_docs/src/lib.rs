@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 use anchor_spl::token::{self, Token};
 use std::mem::size_of;
 
-declare_id!("3osDmv7UbNiNeoz3sPMcWoALeST7usSUVfBK6UphrS5y");
+declare_id!("2Qk4D7V8qdbUL2PQNgRKT19VCM8jwRLycTw2WeY9r1ed");
 
 // Constants
 const USER_NAME_LENGTH: usize = 50;
@@ -279,7 +279,7 @@ pub struct CreateReplyMessage<'info> {
     // Authenticate the reply message account
     #[account(
         init,
-        seeds = [b"reply_message".as_ref(), request.request_index.to_be_bytes().as_ref()],
+        seeds = [b"reply_message".as_ref(), request.request_index.to_be_bytes().as_ref(), request.request_reply_count.to_be_bytes().as_ref()],
         bump,
         payer = authority,
         space = size_of::<ReplyMessageAccount>() + USER_NAME_LENGTH + USER_EMAIL_LENGTH + USER_ACCOUNT_TYPE_LENGTH + 8 + 32 + MAX_REQUEST_MESSAGE_LENGTH // size of reply message account and add 8 bytes for the discriminator
@@ -312,7 +312,7 @@ pub struct CreateReplyDocument<'info> {
     // Authenticate the reply document account
     #[account(
         init,
-        seeds = [b"reply_document".as_ref(), request.request_index.to_be_bytes().as_ref()],
+        seeds = [b"reply_document".as_ref(), request.request_index.to_be_bytes().as_ref(), request.request_reply_count.to_be_bytes().as_ref()],
         bump,
         payer = authority,
         space = size_of::<ReplyDocumentAccount>() + USER_NAME_LENGTH + USER_EMAIL_LENGTH + USER_ACCOUNT_TYPE_LENGTH + 8 + 32 + MAX_REQUEST_MESSAGE_LENGTH // size of reply document account and add 8 bytes for the discriminator

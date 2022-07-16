@@ -19,6 +19,8 @@
     "@solana/wallet-adapter-react-ui": "^0.9.10",
     "@solana/wallet-adapter-wallets": "^0.16.8",
     "@solana/web3.js": "^1.48.0",
+    "axios": "^0.27.2",
+    "file-api": "^0.10.4",
     "framer-motion": "^6.4.2",
     "ipfs-http-client": "^57.0.3",
     "javascript-time-ago": "^2.5.6",

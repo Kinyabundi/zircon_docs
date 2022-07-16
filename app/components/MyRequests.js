@@ -1,15 +1,7 @@
-import {
-    Flex,
-    Box,
-    useColorModeValue,
-    Text
-} from "@chakra-ui/react"
-import RequestItem from "./RequestItem"
-import ReplyMessage from "./ReplyMessage"
-import ReplyDocument from "./ReplyDocument"
+import { Flex, Box, useColorModeValue, Text } from "@chakra-ui/react";
+import RequestItem from "./RequestItem";
 
-
-const MyRequests = () => {
+const MyRequests = ({ requests, getDocumentReplies, getMessageReplies }) => {
     return (
         <>
             <Flex
@@ -18,17 +10,23 @@ const MyRequests = () => {
                 justify={"center"}
                 bg={useColorModeValue("gray.50", "gray.800")}
             >
-                <ReplyMessage />
-                <ReplyDocument />
-                <Box mt={5} mx={"auto"} w={"100%"} px={20}>
-                <Text fontWeight="semibold" fontSize="lg" color={"teal.500"}>
-                    My Requests
-                </Text>
-                    {[...Array(7)].map((_, i) => <RequestItem key={i} />)}
-                </Box>
+                {requests.length > 0 ? (
+                    <Box mt={5} mx={"auto"} w={"100%"} px={20}>
+                        {requests.map((request) => (
+                            <RequestItem
+                                key={request.account.requestIndex}
+                                request={request.account}
+                                getDocumentReplies= {getDocumentReplies}
+                                getMessageReplies= {getMessageReplies}
+                            />
+                        ))}
+                    </Box>
+                ) : (
+                    <Text>No new Requests</Text>
+                )}
             </Flex>
         </>
-    )
-}
+    );
+};
 
-export default MyRequests
+export default MyRequests;

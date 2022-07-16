@@ -210,19 +210,23 @@ const useRequests = () => {
             );
 
         // const documents = await program.account.replyDocumentAccount.all()
-        console.log(documents.length)
 
-        // sort documents by time
-        documents.sort(
-            (a, b) => b?.replyTime?.toNumber() - a?.replyTime?.toNumber()
-        );
+        // remove null values
+        const filteredDocuments = documents.filter((doc) => doc !== null);
 
-        return documents;
+        console.log(filteredDocuments);
+
+        // sort the filtered documents by replyTime
+        const sortedDocuments = filteredDocuments.sort((a, b) => {
+            return b?.replyTime?.toNumber() - a?.replyTime?.toNumber();
+        });
+
+        return sortedDocuments;
     };
 
     const getMessageReplies = async (index, count) => {
-        console.log(index)
-        console.log(count)
+        console.log(index);
+        console.log(count);
         let msgsSigners = [];
 
         for (let i = 0; i < count; i++) {
@@ -243,14 +247,16 @@ const useRequests = () => {
                 msgsSigners
             );
 
-        console.log(messages)
+        // remove null values
+        const filteredMessages = messages.filter((msg) => msg !== null);
+        console.log(filteredMessages);
 
         // sort the messages by time
-        messages.sort(
+        filteredMessages.sort(
             (a, b) => b?.replyTime?.toNumber() - a?.replyTime?.toNumber()
         );
 
-        return messages;
+        return filteredMessages;
     };
 
     return {

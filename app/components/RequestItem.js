@@ -20,7 +20,7 @@ import en from "javascript-time-ago/locale/en.json";
 import RequestReplyDocument from "./RequestReplyDocument";
 import RequestReplyMessage from "./RequestReplyMessage";
 
-TimeAgo.addDefaultLocale(en);
+TimeAgo.addLocale(en);
 
 const timeAgo = new TimeAgo("en-US");
 
@@ -134,7 +134,10 @@ const RequestItem = ({ request, getMessageReplies, getDocumentReplies }) => {
                         <Text>Messages</Text>
                         {showMsgs ? (
                             replyMsgs.map((reply) => (
-                                <RequestReplyMessage replyDetail={reply} />
+                                <RequestReplyMessage
+                                    key={reply?.replyIndex}
+                                    replyDetail={reply}
+                                />
                             ))
                         ) : (
                             <Text>No new replies</Text>

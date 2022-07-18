@@ -1,3 +1,9 @@
+## Team Name: Hermes
+## Number of team members : 2
+## Team members: 1.Vincent Gitonga
+                 2.Christine Kinya
+
+
 ## Inspiration 💡
 
 Most of the time, people are fatally injured or have a life-threatening condition and they require advanced medical care.

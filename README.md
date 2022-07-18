@@ -1,7 +1,6 @@
 ## Team Name: Hermes
 ## Number of team members : 2
-## Team members: 1.Vincent Gitonga
-                 2.Christine Kinya
+## Team members: 1.Vincent Gitonga 2.Christine Kinya
 
 
 ## Inspiration 💡

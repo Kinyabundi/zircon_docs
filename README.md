@@ -34,6 +34,19 @@ When the administrator of Hospital A logs on the app, he/she will view the reque
 - IPFS for storing the medical records.
 - Solana blockchain for the ledger
 
+## How to run 🚀
+- Open this link https://zircon-docs.vercel.app/
+ *To run on local machine*
+ - Clone the repo by run this command on your terminal: git clone https://github.com/Kinyabundi/zircon_docs.git
+ - then cd zircon_docs
+ - then cd app //the app contains the frontend
+ - Install dependencies
+ - Ensure that your node js installed and yarn
+ - then run this command : yarn
+ - After the dependencies have finished being installed run the following command to execute the project on your local machine
+ - yarn dev
+
+
 ## 🚧 Challenges 🚧
 - Implementing the smart contracts in Rust programming language was a challenge.
 - Ran into bugs while building the smart contracts especially while building the anchor smart contract.
